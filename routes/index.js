@@ -4,16 +4,20 @@ var router = express.Router();
   
 var products = [
   {
-      name: "Product #1", description: "A product",      category: "Category #1", price: 100, id: "0"
+      name: "Product #1", description: "A product",      
+      category: "Category #1", price: 100, id: "1"
   },
   {
-      name: "Product #2", description: "A product",      category: "Category #1", price: 110, id: "1"
+      name: "Product #2", description: "A product",      
+      category: "Category #1", price: 110, id: "2"
   },
   {
-      name: "Product #3", description: "A product",      category: "Category #2", price: 210, id: "2"
+      name: "Product #3", description: "A product",      
+      category: "Category #2", price: 210, id: "3"
   },
   {
-      name: "Product #4", description: "A product",      category: "Category #3", price: 202, id: "3"
+      name: "Product #4", description: "A product",      
+      category: "Category #3", price: 202, id: "4"
   }
 ];
 
@@ -27,8 +31,79 @@ var orders = [
   }
 ];
 
+// 상품 삭제
+router.delete('/products/:id', function(req, res, next) {
 
-// 상점 목록 요구
+  var id = req.params.id;
+ 
+  for( var i = 0; i < products.length; i++)
+  {
+    if( products[i].id == id ){
+      products.splice(products.indexOf(products[i]), 1);
+      break;
+    }
+  }
+     
+  res.send("success");
+});
+
+// 상품 수정
+router.post('/products/:id', function(req, res, next) {
+
+  var name = req.body.name;
+  var description = req.body.description;   
+  var category = req.body.category;   
+  var price = req.body.price;   
+  
+  var id = req.params["id"];
+  var id2 = req.params.id;
+ 
+  var product = null;
+  for( var i = 0; i < products.length; i++)
+  {
+    if( products[i].id == id ){
+      products[i].name = name;
+      products[i].description = description;
+      products[i].category = category;
+      products[i].price = price;
+      
+      product = products[i];
+      break;
+    }
+  }
+     
+  res.send(product);
+});
+
+// 상품 등록
+router.post('/products', function(req, res, next) {
+
+  var name = req.body.name;
+  var description = req.body.description;   
+  var category = req.body.category;   
+  var price = req.body.price;   
+  
+  var max_id = -1;
+  for( var i = 0; i < products.length; i++)
+  {
+    if( products[i].id > max_id  ){
+      max_id = products[i].id;
+    }
+  }
+    
+  max_id++;
+  var id = max_id.toString();
+ 
+  var product = {"name":name, "description":description, "category":category, "price":price, "id":id};
+ 
+  console.log("product:",product);   
+  
+  products.push(product);
+     
+  res.send(product);
+});
+
+// 상품 목록 요구
 router.get('/products', function(req, res, next) {
   //render('index', { title: 'jiny\'world' }
 

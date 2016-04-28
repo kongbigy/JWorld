@@ -25,11 +25,14 @@ angular.module("sportsStoreAdmin")
     }
 
     $scope.updateProduct = function (product) {
+        console.log("before $save()");
         product.$save();
         $scope.editedProduct = null;
+        console.log("after $save()");
     }
 
     $scope.startEdit = function (product) {
+        
         $scope.editedProduct = product;
     }
 
