@@ -15,11 +15,11 @@ router.post('/login', function(req, res, next) {
   var notFound = true;
   for(var i = 0; i < users.length; i++)
   {
-    if(users[i].username == username && 
-      users[i].password == password )
-      {
-        notFound = false
-      }
+    if( users[i].username == username && 
+        users[i].password == password )
+    {
+      notFound = false
+    }
   }
   
   if( notFound )
