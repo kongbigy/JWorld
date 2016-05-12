@@ -5,26 +5,29 @@
     <script src="angular.js"></script>
     <link href="bootstrap.css" rel="stylesheet" />
     <link href="bootstrap-theme.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,
+                  initial-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
     <script>
         angular.module("sportsStore", ["customFilters", "cart", "ngRoute"])
         .config(function ($routeProvider) {
-            
+
             $routeProvider.when("/complete", {
                 templateUrl: "/views/thankYou.html"
             });
-            
+
             $routeProvider.when("/placeorder", {
                 templateUrl: "views/placeOrder.html"
             });
-            
+
             $routeProvider.when("/checkout", {
                 templateUrl: "/views/checkoutSummary.html"
             });
-            
+
             $routeProvider.when("/products", {
                 templateUrl: "/views/productList.html"
             });
-            
+
             $routeProvider.otherwise({
                 templateUrl: "/views/productList.html"
             });
@@ -43,7 +46,7 @@
         <cart-summary />
     </div>
     <div class="alert alert-danger" ng-show="data.error">
-        Error ({{data.error.status}}). The product data was not loaded. 
+        Error ({{data.error.status}}). The product data was not loaded.
         <a href="/app.html" class="alert-link">Click here to try again</a>
     </div>
     <ng-view />
